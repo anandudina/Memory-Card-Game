@@ -58,8 +58,7 @@ function matchCards(img1, img2) {
 }
 
 function shaffleCard() {
-  showWinAlert()
-  // hideWinAlert();
+  hideWinAlert();
   matchedCard = 0;
   cardOne = cardTwo = "";
   disableDeck = false;
