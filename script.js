@@ -1,12 +1,14 @@
 const cards = document.querySelectorAll(".Card");
-const winCard = document.querySelector(".winAlert")
+const winCard = document.querySelector(".winAlert");
 
 let cardOne, cardTwo;
 let disableDeck = false;
 let matchedCard = 0;
 
 function flipCard(e) {
+  if (disableDeck) return;
   let clickedCard = e.currentTarget;
+  if (clickedCard === cardOne) return;
   clickedCard.classList.add("flip");
 
   if (clickedCard !== cardOne && !disableDeck) {
@@ -26,11 +28,10 @@ function matchCards(img1, img2) {
   if (img1 === img2) {
     matchedCard++;
     if (matchedCard == 8) {
-        
-        return showWinAlert()
+      return showWinAlert();
       //Game END
       // setTimeout(() => {
-        
+
       //   return shaffleCard();
       // }, 2000);
     }
@@ -39,19 +40,19 @@ function matchCards(img1, img2) {
     cardOne = cardTwo = "";
     console.log("Cards matched");
     return (disableDeck = false);
-  }
-  else{
+  } else {
+    disableDeck = true;
     setTimeout(() => {
-    cardOne.classList.add("shake");
-    cardTwo.classList.add("shake");
-  }, 400);
+      cardOne.classList.add("shake");
+      cardTwo.classList.add("shake");
+    }, 400);
 
-  setTimeout(() => {
-    cardOne.classList.remove("shake", "flip");
-    cardTwo.classList.remove("shake", "flip");
-    cardOne = cardTwo = "";
-    disableDeck = false;
-  }, 1000);
+    setTimeout(() => {
+      cardOne.classList.remove("shake", "flip");
+      cardTwo.classList.remove("shake", "flip");
+      cardOne = cardTwo = "";
+      disableDeck = false;
+    }, 1000);
   }
 }
 
@@ -59,13 +60,13 @@ function shaffleCard() {
   hideWinAlert();
   matchedCard = 0;
   cardOne = cardTwo = "";
-  disableDeck=false;
+  disableDeck = false;
   let arr = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
   arr.sort(() => (Math.random() > 0.5 ? 1 : -1));
-  cards.forEach((card,index) => {
-    card.classList.remove("flip","shake");
+  cards.forEach((card, index) => {
+    card.classList.remove("flip", "shake");
     let imgTag = card.querySelector("img");
-    imgTag.src =  `images/img-${arr[index]}.png`;
+    imgTag.src = `images/img-${arr[index]}.png`;
     card.addEventListener("click", flipCard);
   });
 }
@@ -78,16 +79,14 @@ function showWinAlert() {
   }, 10);
 }
 
-function hideWinAlert(){
-    if (!winCard.classList.contains("hidden")) {
+function hideWinAlert() {
+  if (!winCard.classList.contains("hidden")) {
     winCard.classList.remove("opacity-100");
     winCard.classList.add("opacity-0");
     setTimeout(() => {
       winCard.classList.add("hidden");
-    }, 700); 
+    }, 700);
   }
 }
 
-shaffleCard()
-
-
+shaffleCard();
