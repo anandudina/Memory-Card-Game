@@ -1,4 +1,5 @@
 const cards = document.querySelectorAll(".Card");
+const winCard = document.querySelector(".winAlert")
 
 let cardOne, cardTwo;
 let disableDeck = false;
@@ -25,13 +26,13 @@ function matchCards(img1, img2) {
   if (img1 === img2) {
     matchedCard++;
     if (matchedCard == 8) {
-        setTimeout(()=>{
-            alert("you Won!")
-        },800)
+        
+        return showWinAlert()
       //Game END
-      setTimeout(() => {
-        return shaffleCard();
-      }, 2000);
+      // setTimeout(() => {
+        
+      //   return shaffleCard();
+      // }, 2000);
     }
     cardOne.removeEventListener("click", flipCard);
     cardTwo.removeEventListener("click", flipCard);
@@ -55,22 +56,38 @@ function matchCards(img1, img2) {
 }
 
 function shaffleCard() {
+  hideWinAlert();
   matchedCard = 0;
   cardOne = cardTwo = "";
   disableDeck=false;
   let arr = [1, 2, 3, 4, 5, 6, 7, 8, 1, 2, 3, 4, 5, 6, 7, 8];
   arr.sort(() => (Math.random() > 0.5 ? 1 : -1));
   cards.forEach((card,index) => {
-    card.classList.remove("flip");
+    card.classList.remove("flip","shake");
     let imgTag = card.querySelector("img");
     imgTag.src =  `images/img-${arr[index]}.png`;
     card.addEventListener("click", flipCard);
   });
 }
 
+function showWinAlert() {
+  winCard.classList.remove("hidden");
+  setTimeout(() => {
+    winCard.classList.remove("opacity-0");
+    winCard.classList.add("opacity-100");
+  }, 10);
+}
+
+function hideWinAlert(){
+    if (!winCard.classList.contains("hidden")) {
+    winCard.classList.remove("opacity-100");
+    winCard.classList.add("opacity-0");
+    setTimeout(() => {
+      winCard.classList.add("hidden");
+    }, 700); 
+  }
+}
+
 shaffleCard()
 
-// cards.forEach((card) => {
-// //      
-//   card.addEventListener("click", flipCard);
-// });
+

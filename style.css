@@ -1,102 +1,105 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: rgb(124, 72, 229)!important;
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: rgb(124, 72, 229) !important;
 }
 
-.wrapper{
-    height: 400px;
-    width: 400px;
-    background-color: whitesmoke;
-    border-radius: 10px;
-    padding: 25px;
+.wrapper {
+  width: 90vw;              /* fluid width */
+  max-width: 25rem;         /* ~400px if root font-size = 16px */
+  aspect-ratio: 1 / 1;
+  background-color: whitesmoke;
+  padding: 1.5rem;
 }
 
-.Cards,.Card,.view{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.Cards,
+.Card,
+.view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.Cards{
-    height: 100%;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.Cards {
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.Cards .Card{
-    cursor: pointer;
-    position: relative;
-    perspective: 800px;
-    transform-style: preserve-3d;
-    height: calc(100% / 4 - 10px);
-    width:  calc(100% / 4 - 10px);
+.Cards .Card {
+  cursor: pointer;
+  position: relative;
+  perspective: 800px;
+  transform-style: preserve-3d;
+  height: calc(100% / 4 - 10px);
+  width: calc(100% / 4 - 10px);
 }
 
-.Card.shake{
-    animation: shake 0.35s ease-in-out;
+.Card.shake {
+  animation: shake 0.35s ease-in-out;
 }
 
 @keyframes shake {
-    0%,100%{
-        transform: translateX(0);
-    }
-    20%{
-        transform: translateX(-13px);
-    }
-    100%{
-        transform: translateX(13px);
-    }
-    100%{
-        transform: translateX(-8px);
-    }
-    100%{
-        transform: translateX(8px);
-    }
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-13px);
+  }
+  40% {
+    transform: translateX(13px);
+  }
+  60% {
+    transform: translateX(-8px);
+  }
+  80% {
+    transform: translateX(8px);
+  }
 }
 
-.Cards .Card .view{
-    height: 100%;
-    width: 100%;
-    pointer-events: none;
-    user-select: none;
-    position: absolute;
-    background: white;
-    transition: transform 0.25s linear;
-    border-radius: 7px;
-    backface-visibility: hidden;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+.Cards .Card .view {
+  height: 100%;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+  position: absolute;
+  background: white;
+  transition: transform 0.25s linear;
+  border-radius: 7px;
+  backface-visibility: hidden;
+  box-shadow: 0 0.1875rem 0.625rem rgba(0, 0, 0, 0.1);
 }
 
-.Card .front-view{
-    z-index: 2;
+.Card .front-view {
+  z-index: 2;
 }
 
-.Card .front-view span{
-   font-size: 43px;
-   color: rgb(124, 72, 229);
+.Card .front-view span {
+  
+  color: rgb(124, 72, 229);
 }
 
-.Card .back-view{
-    transform: rotateY(-180deg);
+.Card .back-view {
+  transform: rotateY(-180deg);
 }
 
-.Card .back-view img{
-    max-width: 45px;
+.Card .back-view img {
+  max-width: 45px;
 }
-.Card.flip .front-view{
-    transform: rotateY(180deg);
+.Card.flip .front-view {
+  transform: rotateY(180deg);
 }
-.Card.flip .back-view{
-    transform: rotateY(0);
+.Card.flip .back-view {
+  transform: rotateY(0);
 }
