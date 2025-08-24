@@ -41,6 +41,7 @@ function matchCards(img1, img2) {
     console.log("Cards matched");
     return (disableDeck = false);
   } else {
+    console.log("Cards not matched");
     disableDeck = true;
     setTimeout(() => {
       cardOne.classList.add("shake");
@@ -57,7 +58,8 @@ function matchCards(img1, img2) {
 }
 
 function shaffleCard() {
-  hideWinAlert();
+  showWinAlert()
+  // hideWinAlert();
   matchedCard = 0;
   cardOne = cardTwo = "";
   disableDeck = false;
